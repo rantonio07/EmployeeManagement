@@ -31,18 +31,8 @@
         </nav>
     </header>
     <div class="container">
-        <h1 class="card-title">Employees</h1>
+        <h1 class="card-title p-4">Employees</h1>
         <table id="empleadosTable" class="display">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>FirstName</th>
-                    <th>LastName</th>
-                    <th>Email</th>
-                    <th>DateOfBirth</th>
-                    <th>Position</th>
-                </tr>
-            </thead>
         </table>
     </div>
     <script src="~/js/datatables.js"></script>
@@ -53,13 +43,15 @@
     <script>
         $(document).ready(function () {
             $('#empleadosTable').DataTable({
-                ajax:{
-                    url: '/GetAllEmployee',
-                    type: 'GET',
-                    dataType: "json"
+                paging: false,
+                searching: true,
+                "ajax": {
+                    "url": '/Employee/GetAllEmployee',
+                    "type": 'GET',
+                    "datatype": "json"
                 },
-                    "columns": [
-                    { "data": "id" },
+                "columns": [
+                    { "data": "Id" },
                     { "data": "FirstName" },
                     { "data": "LastName" },
                     { "data": "Email" },
@@ -69,7 +61,7 @@
                         "data": "id",
                         "render": function (data) {
                             return `<button class='btn btn-warning' onclick="editarEmpleado(${data})">Editar</button>
-                                            <button class='btn btn-danger' onclick="eliminarEmpleado(${data})">Eliminar</button>`;
+                                                <button class='btn btn-danger' onclick="eliminarEmpleado(${data})">Eliminar</button>`;
                         }
                     }]
             });

@@ -33,6 +33,17 @@
     <div class="container">
         <h1 class="card-title p-4">Employees</h1>
         <table id="empleadosTable" class="display">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
+                    <th>DateOfBirth</th>
+                    <th>Position</th>
+                    <th></th>
+                </tr>
+            </thead>
         </table>
     </div>
     <script src="~/js/datatables.js"></script>
@@ -45,25 +56,27 @@
             $('#empleadosTable').DataTable({
                 paging: false,
                 searching: true,
-                "ajax": {
-                    "url": '/Employee/GetAllEmployee',
-                    "type": 'GET',
-                    "datatype": "json"
+                ajax: {
+                    url: '/Employee/GetAllEmployee',
+                    type: 'GET',
+                    datatype: 'json',
+                    dataSrc: 'data'
                 },
-                "columns": [
-                    { "data": "Id" },
-                    { "data": "FirstName" },
-                    { "data": "LastName" },
-                    { "data": "Email" },
-                    { "data": "DateOfBirth" },
-                    { "data": "Position" },
-                    {
-                        "data": "id",
-                        "render": function (data) {
-                            return `<button class='btn btn-warning' onclick="editarEmpleado(${data})">Editar</button>
-                                                <button class='btn btn-danger' onclick="eliminarEmpleado(${data})">Eliminar</button>`;
-                        }
-                    }]
+                columns: [
+                    { data: 'Id' },
+                    { data: 'FirstName' },
+                    { data: 'LastName' },
+                    { data: 'Email' },
+                    { data: 'DateOfBirth' },
+                    { data: 'Position' }
+                    //{
+                    //    data: 'Id',
+                    //    render: function (data) {
+                    //        return `<button class='btn btn-secondary' onclick="editarEmpleado(${data})">Editar</button>
+                    //                            <button class='btn btn-danger' onclick="eliminarEmpleado(${data})">Eliminar</button>`;
+                    //    }
+                    //}
+                ]
             });
         });
     </script>

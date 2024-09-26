@@ -34,9 +34,9 @@ namespace EmployeeManagement.Controllers
 
             var empleados = new List<Employee>
             {
-                new Employee { Id = 1, FirstName = "María", LastName = "Gerente", Email= "g@g.com" },
-                new Employee { Id = 2, FirstName = "Carlos", LastName = "Analista", Email= "g@g.com"},
-                new Employee { Id = 3, FirstName = "Juan", LastName = "Desarrollador", Email= "g@g.com" },
+                new Employee { Id = 1, FirstName = "María", LastName = "Gerente", Email= "g@g.com", DateOfBirth = "25-05-2000", Position = "mensaje" },
+                new Employee { Id = 2, FirstName = "Carlos", LastName = "Analista", Email= "g@g.com", DateOfBirth = "25-05-2000", Position = "mensaje"},
+                new Employee { Id = 3, FirstName = "Juan", LastName = "Desarrollador", Email= "g@g.com", DateOfBirth = "25-05-2000", Position = "mensaje" },
             };
 
             //var empleados = _context.Empleados.ToList();
@@ -58,7 +58,7 @@ namespace EmployeeManagement.Controllers
         // GET: EmployeeController/Create
         [HttpPost] //Create
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Employee employee)
+        public async Task<IActionResult> CreateEmployee(Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace EmployeeManagement.Controllers
         }
 
         // GET: /Edit
-        public async Task<IActionResult> Edit(Employee employee)
+        public async Task<IActionResult> EditEmployee(Employee employee)
         {
             var ifExistEmployee = _context.Empleados.Find(employee.Id);
             if (ifExistEmployee != null)

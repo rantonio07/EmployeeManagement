@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Employee";
+    //Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EmployeeManagement</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/jquery-3.7.1.min.js"></script>
+    <link href="/css/datatables.css" rel="stylesheet" />
+
+    <script src="https://cdn.datatables.net/v/dt/dt-2.1.7/datatables.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand text-center" asp-area="" asp-controller="Home" asp-action="Index">Employee Management</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 class="card-title">Employees</h1>
+        <table id="empleadosTable" class="display">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
+                    <th>DateOfBirth</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <script src="~/js/datatables.js"></script>
+    <script src="~/js/datatables.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#empleadosTable').DataTable({
+                ajax:{
+                    url: '/GetAllEmployee',
+                    type: 'GET',
+                    dataType: "json"
+                },
+                    "columns": [
+                    { "data": "id" },
+                    { "data": "FirstName" },
+                    { "data": "LastName" },
+                    { "data": "Email" },
+                    { "data": "DateOfBirth" },
+                    { "data": "Position" },
+                    {
+                        "data": "id",
+                        "render": function (data) {
+                            return `<button class='btn btn-warning' onclick="editarEmpleado(${data})">Editar</button>
+                                            <button class='btn btn-danger' onclick="eliminarEmpleado(${data})">Eliminar</button>`;
+                        }
+                    }]
+            });
+        });
+    </script>
+</body>
+</html>
